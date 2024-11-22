@@ -3,12 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>音乐播放器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #333;
+            margin-top: 50px;
+        }
+        audio {
+            display: block;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+        }
+        .error-message {
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>我的音乐播放器</h1>
-    <audio controls autoplay preload="auto">
-        <source src="https://username.github.io/my-music-player/song.mp3" type="audio/mpeg">
+    <audio id="musicPlayer" controls autoplay preload="auto">
+        <source src="https://WXB-dev.github.io/my-music-player/song.mp3" type="audio/mpeg">
+        <source src="https://WXB-dev.github.io/my-music-player/song.ogg" type="audio/ogg">
         您的浏览器不支持 audio 元素。
     </audio>
+    <div id="errorMessage" class="error-message" style="display: none;">
+        无法加载音频文件，请检查网络连接或文件路径。
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('musicPlayer');
+            const errorMessage = document.getElementById('errorMessage');
+
+            audio.addEventListener('error', function() {
+                errorMessage.style.display = 'block';
+            });
+
+            audio.addEventListener('canplay', function() {
+                errorMessage.style.display = 'none';
+            });
+        });
+    </script>
 </body>
 </html>
